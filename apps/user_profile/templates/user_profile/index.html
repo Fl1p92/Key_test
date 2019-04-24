@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Profile page{% endblock %}
+
+{% block content %}
+    <p>First name: {{ profile.first_name }}</p>
+    <p>Last name: {{ profile.last_name }}</p>
+    <p>Date of birth: {{ profile.date_of_birth }}</p>
+    <p>Biography: {{ profile.biography | linebreaks }}</p>
+    <p>Contacts: <br>
+        {% for contact in profile.contacts.all %}
+            - {{ contact.first_name }} {{ contact.last_name }} <br>
+        {% endfor %}
+    </p>
+{% endblock content %}
