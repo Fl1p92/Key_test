@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load static widget_tweaks %}
+
+{% block title %}Edit profile of {{ request.user }}{% endblock title %}
+
+{% block styles %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static "user_profile/css/bootstrap-datepicker3.min.css" %}">
+{% endblock styles %}
+
+{% block content %}
+    <a href="{% url "user_profile:index" %}" class="badge badge-primary"> < Home</a>
+    <h1>Edit profile of {{ request.user }}</h1>
+    <form method="POST" enctype='multipart/form-data' class="item-form">
+    <div class="form-group" style="width: 20%;">
+        {% csrf_token %}
+        {% for field in form %}
+            <p><label>{{ field.label }}</label>{% render_field field class="form-control" %}</p>
+        {% endfor %}
+        <button class="btn btn-info">Сохранить</button>
+        </div>
+    </form>
+{% endblock content %}
+
+{% block scripts %}
+    {{ block.super }}
+    <script src="{% static "user_profile/js/bootstrap-datepicker.min.js" %}"></script>
+    <script src="{% static "user_profile/locales/bootstrap-datepicker.uk.min.js" %}"></script>
+    <script>
+        $('#id_date_of_birth').datepicker({
+            format: "dd.mm.yyyy",
+            todayBtn: true,
+            language: "uk",
+            daysOfWeekHighlighted: "0,6",
+            todayHighlight: true
+        });
+    </script>
+{% endblock scripts %}

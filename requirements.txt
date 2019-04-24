@@ -8,6 +8,7 @@ backcall==0.1.0           # via ipython
 click==7.0                # via pip-tools
 decorator==4.4.0          # via ipython, traitlets
 django-environ==0.4.5
+django-widget-tweaks==1.4.3
 django==2.2
 ipython-genutils==0.2.0   # via traitlets
 ipython==7.4.0

@@ -1,5 +1,6 @@
 django<3.0
 django-environ
+django-widget-tweaks
 ipython
 pip-tools
 psycopg2-binary

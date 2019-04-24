@@ -4,5 +4,6 @@ from . import views
 
 
 urlpatterns = [
-    path('', views.IndexView.as_view(), kwargs={'pk': 1}, name='index'),
+    path('', views.IndexView.as_view(), name='index'),
+    path('edit/', views.EditProfileView.as_view(), name='edit'),
 ]

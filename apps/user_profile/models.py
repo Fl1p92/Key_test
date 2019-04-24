@@ -7,6 +7,7 @@ class Profile(models.Model):
     date_of_birth = models.DateField('Date of birth')
     biography = models.TextField('Biography')
     contacts = models.ManyToManyField('Profile', blank=True)
+    user = models.OneToOneField('auth.User', on_delete=models.CASCADE, related_name='profile')
 
     class Meta:
         verbose_name = 'Profile'
