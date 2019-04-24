@@ -26,6 +26,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'apps.user_profile.apps.UserProfileConfig',
+    'apps.core.apps.CoreConfig',
 ]
 
 MIDDLEWARE = [
@@ -36,6 +37,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'apps.core.middleware.SaveRequestMiddleware',
 ]
 
 ROOT_URLCONF = 'key_test.urls'
@@ -51,6 +53,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'apps.core.context_processors.settings_processor',
             ],
         },
     },

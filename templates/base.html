@@ -14,6 +14,15 @@
 </head>
 
 <body>
+<div class="page-header">
+    {% if user.is_authenticated %}
+        <p class="top-menu">Моё почтение, {{ user.username }}
+            <small>(<a href="{% url 'logout' %}?next={{ request.path }}">Выйти</a>)</small>
+        </p>
+    {% else %}
+        <a href="{% url 'login' %}?next={{ request.path }}"></a>
+    {% endif %}
+</div>
 <div class="container-fluid">
     {% block content %}
     {% endblock content %}
