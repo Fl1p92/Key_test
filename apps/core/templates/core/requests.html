@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}Last requests{% endblock %}
+
+{% block content %}
+    <a href="{% url "user_profile:index" %}" class="badge badge-primary"> < Home</a>
+    <br>
+    <h1>List of 10 last requests</h1>
+    {% for req in request_list|slice:":10" %}
+        <hr>
+        <p>{{ req.time }} {{ req.user }} {{ req.method }} {{ req.path }} {{ req.execution_time }}</p>
+        <hr>
+    {% endfor %}
+
+{% endblock content %}

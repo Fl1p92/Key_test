@@ -4,13 +4,25 @@
 {% block title %}Profile page{% endblock %}
 
 {% block content %}
-    <p>First name: {{ profile.first_name }} <a href="{% get_admin_url profile %}" class="badge badge-warning"> Admin edit <img src="{% static "user_profile/images/pencil.svg" %}"></a></p>
-    <p>Last name: {{ profile.last_name }}</p>
-    <p>Date of birth: {{ profile.date_of_birth }}</p>
-    <p>Biography: {{ profile.biography | linebreaks }}</p>
-    <p>Contacts: <br>
-        {% for contact in profile.contacts.all %}
-            - {{ contact.first_name }} {{ contact.last_name }} <br>
-        {% endfor %}
-    </p>
+    {% if profile %}
+        <h4>
+            <a href="{% url "core:requests" %}" class="badge badge-success">Last 10 http requests</a>
+            <a href="{% url "core:logs" %}" class="badge badge-info">Logs of models manipulations</a>
+        </h4>
+        <h4>
+            <a href="{% url "user_profile:edit" %}" class="badge badge-info"><img src="{% static "user_profile/images/pencil.svg" %}"> Edit profile here</a>
+            <a href="{% get_admin_url profile %}" class="badge badge-warning"><img src="{% static "user_profile/images/pencil.svg" %}"> Admin edit</a>
+        </h4>
+        <p>First name: {{ profile.first_name }}</p>
+        <p>Last name: {{ profile.last_name }}</p>
+        <p>Date of birth: {{ profile.date_of_birth }}</p>
+        <p>Biography: {{ profile.biography | linebreaks }}</p>
+        <p>Contacts: <br>
+            {% for contact in profile.contacts.all %}
+                - {{ contact.first_name }} {{ contact.last_name }} <br>
+            {% endfor %}
+        </p>
+    {% else %}
+        <div>You have no profile! If you have permissions let's go <a href="{% url 'admin:user_profile_profile_add' %}">create!</a></div>
+    {% endif %}
 {% endblock content %}

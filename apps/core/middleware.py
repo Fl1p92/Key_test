@@ -10,11 +10,12 @@ class SaveRequestMiddleware(MiddlewareMixin):
         request._start_time = timezone.now()
 
     def process_response(self, request, response):
+        request._stop_time = timezone.now()
         Request.objects.create(
             path=request.path,
             method=request.method,
             time=request._start_time,
             user=request.user,
-            execution_time=timezone.now() - request._start_time,
+            execution_time=request._stop_time - request._start_time,
         )
         return response

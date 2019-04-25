@@ -3,24 +3,21 @@ from django.urls import reverse_lazy
 from django.views.generic import DetailView, UpdateView
 
 from .forms import ProfileEditForm
-from .models import Profile
 
 
-class RequestUserObjectMixin:
+class RequestUserProfileMixin:
     def get_object(self, queryset=None):
-        if queryset is None:
-            queryset = self.get_queryset()
-        obj = queryset.get(user=self.request.user)
-        return obj
+        profile = None
+        if hasattr(self.request.user, 'profile'):
+            profile = self.request.user.profile
+        return profile
 
 
-class IndexView(LoginRequiredMixin, RequestUserObjectMixin, DetailView):
-    model = Profile
+class IndexView(LoginRequiredMixin, RequestUserProfileMixin, DetailView):
     template_name = 'user_profile/index.html'
 
 
-class EditProfileView(LoginRequiredMixin, RequestUserObjectMixin, UpdateView):
-    model = Profile
+class EditProfileView(LoginRequiredMixin, RequestUserProfileMixin, UpdateView):
     template_name = 'user_profile/edit_profile.html'
     form_class = ProfileEditForm
     success_url = reverse_lazy('user_profile:index')

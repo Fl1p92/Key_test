@@ -1,6 +1,5 @@
-from datetime import datetime
-
 from django import forms
+from django.utils import timezone
 
 from .models import Profile
 
@@ -17,7 +16,7 @@ class ProfileEditForm(forms.ModelForm):
 
     def save(self, commit=True):
         object = super().save(commit=False)
-        object.last_edit_time = datetime.now()
+        object.last_edit_time = timezone.now()
         object.last_editor_ip = self.get_client_ip()
         object.save()
         self.save_m2m()

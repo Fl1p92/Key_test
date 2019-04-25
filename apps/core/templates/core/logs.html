@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}Info logs{% endblock %}
+
+{% block content %}
+    <a href="{% url "user_profile:index" %}" class="badge badge-primary"> < Home</a>
+    <br>
+    <h1>Logs of models manipulations</h1>
+    {% for logline in logline_list|slice:":10" %}
+        <hr>
+        <p>{{ logline.logging_time }} [{{ logline.logging_type }}] -- {{ logline.logging_text }}</p>
+        <hr>
+    {% endfor %}
+
+{% endblock content %}
