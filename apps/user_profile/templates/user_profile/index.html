@@ -1,10 +1,10 @@
 {% extends "base.html" %}
-{% load static %}
+{% load static core_extras %}
 
 {% block title %}Profile page{% endblock %}
 
 {% block content %}
-    <p>First name: {{ profile.first_name }}</p>
+    <p>First name: {{ profile.first_name }} <a href="{% get_admin_url profile %}" class="badge badge-warning"> Admin edit <img src="{% static "user_profile/images/pencil.svg" %}"></a></p>
     <p>Last name: {{ profile.last_name }}</p>
     <p>Date of birth: {{ profile.date_of_birth }}</p>
     <p>Biography: {{ profile.biography | linebreaks }}</p>
