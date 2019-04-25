@@ -8,6 +8,8 @@ class Profile(models.Model):
     biography = models.TextField('Biography')
     contacts = models.ManyToManyField('Profile', blank=True)
     user = models.OneToOneField('auth.User', on_delete=models.CASCADE, related_name='profile')
+    last_edit_time = models.DateTimeField('Last change time', blank=True, null=True)
+    last_editor_ip = models.GenericIPAddressField('Last editor IP', blank=True, null=True)
 
     class Meta:
         verbose_name = 'Profile'

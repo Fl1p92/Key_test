@@ -2,6 +2,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic import DetailView, UpdateView
 
+from .forms import ProfileEditForm
 from .models import Profile
 
 
@@ -21,5 +22,10 @@ class IndexView(LoginRequiredMixin, RequestUserObjectMixin, DetailView):
 class EditProfileView(LoginRequiredMixin, RequestUserObjectMixin, UpdateView):
     model = Profile
     template_name = 'user_profile/edit_profile.html'
-    fields = ('first_name', 'last_name', 'date_of_birth', 'biography', 'contacts',)
+    form_class = ProfileEditForm
     success_url = reverse_lazy('user_profile:index')
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
